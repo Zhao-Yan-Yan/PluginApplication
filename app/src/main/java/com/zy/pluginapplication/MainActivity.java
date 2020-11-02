@@ -6,18 +6,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import dalvik.system.DexClassLoader;
 import okio.BufferedSink;
-import okio.BufferedSource;
 import okio.Okio;
-import okio.Sink;
 import okio.Source;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DexClassLoader classLoader = new DexClassLoader(pluginApk.getAbsolutePath(), getExternalFilesDir("pluginApks").getAbsolutePath(), null, null);
+        DexClassLoader classLoader = new DexClassLoader(pluginApk.getAbsolutePath(), pluginApk.getAbsolutePath(), null, null);
         try {
             Class<?> utilsClass = classLoader.loadClass("com.zy.plugin.utils.Utils");
             Constructor<?> constructor = utilsClass.getDeclaredConstructors()[0];
